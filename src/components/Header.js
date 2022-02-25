@@ -12,7 +12,7 @@ const Header = () => {
       </div>
       <div className="searchBar">
         <div className="searchIconContainer">
-          <img src={searchIcon} />
+          <img src={searchIcon} alt="" />
         </div>
         <input
           className="searchInput"
@@ -29,6 +29,7 @@ const Header = () => {
           <img src={themeSwitchIcon} alt="" />
         </div>
       </div>
+      <div className="loginButton">GETIN</div>
     </div>
   );
 };
