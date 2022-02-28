@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import { CONST, rpc, wallet } from "@cityofzion/neon-core";
 import PunkList from "./components/PunkList";
+import Main from "./components/Main";
 
 function App() {
   const inputs = {
@@ -21,6 +22,7 @@ function App() {
   };
 
   const [punkListData, setPunkListData] = useState([]);
+  const [selectedPunk, setSelectedPunk] = useState(0);
   useEffect(() => {
     const rpcClient = new rpc.RPCClient(inputs.nodeUrl);
 
@@ -46,7 +48,7 @@ function App() {
         ttmPropertiesList.push(tokenProperty);
       }
       setPunkListData(ttmPropertiesList);
-      console.log(ttmPropertiesList);
+      console.log(ttmPropertiesList[0]);
     };
     return checkBalance();
   }, [inputs.tokenScriptHash, inputs.nodeUrl]);
@@ -54,7 +56,15 @@ function App() {
   return (
     <div className="app">
       <Header />
-      <PunkList punkListData={punkListData} />
+      {punkListData.length && (
+        <>
+          <Main punkListData={punkListData} selectedPunk={selectedPunk} />
+          <PunkList
+            punkListData={punkListData}
+            setSelectedPunk={setSelectedPunk}
+          />
+        </>
+      )}
     </div>
   );
 }
